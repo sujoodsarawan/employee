@@ -1,0 +1,191 @@
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.order-section {
+  padding: 9rem 0;
+  background-color: #fff;
+  display: block;
+
+  .wrapper2 {
+    margin: 0 auto;
+
+    &--w790 {
+      max-width: 790px;
+    }
+  }
+
+  .card {
+    width: 100%;
+    background-color: #fff;
+    border: 3px;
+
+    &-5 {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: none;
+      border: 1px solid #eee;
+    }
+
+    &-comment {
+      border: none;
+    }
+
+    &-heading {
+      padding: 30px 0;
+      background-color: #2b5c7d;
+      color: #fff;
+      text-align: center;
+
+      .title {
+        margin-bottom: 0;
+        font-size: 2rem;
+      }
+    }
+
+    &-body {
+      padding: 52px 85px;
+      padding-bottom: 73px;
+    }
+  }
+
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 40px;
+
+    .name {
+      width: 130px;
+      color: #555;
+      font-size: 15px;
+      font-weight: 700;
+      span {
+        font-size: 12px;
+      }
+    }
+
+    .value {
+      width: calc(100% - 130px);
+    }
+
+    .input-group-desc {
+      position: relative;
+
+      .input--style-5 {
+        background-color: #fff;
+        line-height: 50px;
+        border-radius: 5px;
+        padding: 0 22px;
+        font-size: 16px;
+        color: #555;
+
+        outline: none;
+        border: 1px solid #ddd;
+        margin: 0;
+        box-shadow: 0;
+        width: 100%;
+        font-family: inherit;
+      }
+
+      .label--desc {
+        position: absolute;
+        text-transform: capitalize;
+        display: block;
+        color: #999;
+        font-size: 14px;
+        margin-top: 7px;
+        left: 0;
+      }
+    }
+  }
+
+  .label--block {
+    width: 100%;
+    display: block;
+    padding-bottom: 2rem;
+  }
+  .label {
+    color: #555;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .radio {
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: capitalize;
+    display: inline-block;
+    color: #000;
+    position: relative;
+    cursor: pointer;
+    padding-left: 30px;
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    span {
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      border: 3px solid #00aeef;
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 5px;
+
+      &::after {
+        content: "";
+        height: 8px;
+        width: 8px;
+        background-color: #00aeef;
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        border-radius: 50%;
+        transition: 300 ease-in-out 0s;
+      }
+    }
+
+    input[type="radio"]:checked ~ span::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  input[type="text"]:disabled,
+  input[type="tel"]:disabled,
+  input[type="email"]:disabled {
+    background-color: #ecedf0 !important;
+    color: #6a6666 !important;
+    border: none !important;
+    cursor: not-allowed;
+  }
+}
+
+input:hover,
+input:focus,
+textarea:hover {
+  border: 1px solid #00a2e5 !important;
+}
+.textarea {
+  height: 320px;
+  width: 100%;
+}
+
+.comment-heading {
+  text-align: center;
+  color: #fff;
+
+  &--secondary {
+    font-size: 5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+}

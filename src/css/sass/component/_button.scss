@@ -1,0 +1,36 @@
+.custom-button {
+  width: 72px;
+  border-radius: 5px;
+  padding: 7px;
+  display: inline-block;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+}
+.btn-info {
+  color: #fff;
+  background-color: #2196f3;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.btn-delete {
+  color: #fff;
+  background-color: #e10000;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+.btn-box {
+  display: inline-block;
+
+  &:not(:last-child) {
+    margin-right: 30px;
+  }
+}
+.btn-width {
+  padding: 15px;
+}
