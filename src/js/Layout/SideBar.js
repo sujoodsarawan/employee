@@ -30,24 +30,32 @@ class SideBar extends Component {
               <span className="icon">
                 <i className="fas fa-volleyball-ball"></i>
               </span>
-              <span className="title">Sports</span>
+              <span className="title">Renew Id</span>
             </Link>
           </li>
           <li>
-            <a href="#!">
+            <Link to='/order/birth/certificate'>
               <span className="icon">
                 <i className="fas fa-blog"></i>
               </span>
-              <span className="title">Blogs</span>
-            </a>
+              <span className="title">Copy</span>
+              </Link>
           </li>
           <li>
-            <a href="#!">
+            <Link to='/child/birth/certificate'>
               <span className="icon">
                 <i className="fas fa-leaf"></i>
               </span>
               <span className="title">Nature</span>
-            </a>
+            </Link>
+          </li>
+          <li>
+            <Link to='/renew/passport'>
+              <span className="icon">
+                <i className="fas fa-leaf"></i>
+              </span>
+              <span className="title">Renew Passport</span>
+            </Link>
           </li>
         </ul>
       </div>

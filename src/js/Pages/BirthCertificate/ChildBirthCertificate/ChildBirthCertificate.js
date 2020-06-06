@@ -2,40 +2,33 @@ import React, { Component } from "react";
 import axios from "axios";
 import TabelForm from "../../../Component/Tabel/Tabel";
 
-class RenewId extends Component {
+class ChildBirthCertificate extends Component {
   constructor(props) {
     super(props);
     this.state = {
       existData: [],
       loading: false,
+      data:""
     };
   }
 
-  fetchDataHandler = () => {
-    let url = "https://graduationproject1.herokuapp.com/id/idRequests/";
-    axios
-      .get(url)
-      .then((response) => {
-        this.setState(
-          {
-            existData: response.data.doc,
-            loading: true,
-          },
-          console.log(this.state.existData)
-        );
 
+
+  componentDidMount() {
+    axios
+      .get(
+        "https://graduationproject1.herokuapp.com/birthcertificate/getrequestedbirthcertificatesforchild"
+      )
+      .then((response) => {
+        this.setState({
+          existData: response.data.doc,
+          loading: true,
+        });
         console.log(response);
       })
       .catch((err) => {
         console.log(err);
       });
-
-    console.log("End");
-  };
-
-  componentDidMount() {
-    this.fetchDataHandler();
-    console.log("componentDidMount");
   }
 
   renderTableData() {
@@ -45,8 +38,9 @@ class RenewId extends Component {
         index={index}
         key={employee._id}
         requestedDate={employee.requestedDate}
-        data={employee.socialSecurityNumber}
-        link="/renew/id/requests"
+        nationalIdForKid={employee.nationalIdForFather}
+        image={employee.birthAnnouncmentImage.substring(7) }
+        link="/child/birth/certificate"
         {...this.props}
       />
     ));
@@ -54,8 +48,6 @@ class RenewId extends Component {
 
   render() {
     const { loading, existData } = this.state;
-    console.log(loading);
-    console.log(existData);
 
     let tabel = null;
 
@@ -68,7 +60,8 @@ class RenewId extends Component {
           <thead>
             <tr>
               <th>Number</th>
-              <th>Social Security Ssn</th>
+              <th>Father's NationalID</th>
+              <th>Birth certificate</th>
               <th>Date</th>
               <th>More Info</th>
             </tr>
@@ -80,20 +73,25 @@ class RenewId extends Component {
       <div style={{ textAlign: "center" }}>No Requests</div>
     );
 
+
+
     return (
       <div>
         <div className="main_container">
-          {loading ? (
+
+           {loading ? (
             tabel
           ) : (
             <div style={{ textAlign: "center" }} className="loader">
               Loading...
             </div>
           )}
+
+          
         </div>
       </div>
     );
   }
 }
 
-export default RenewId;
+export default ChildBirthCertificate;

@@ -31,11 +31,6 @@ class FirstId extends Component {
     this.fetchDataHandler();
     console.log("componentDidMount , id")
   }
-
-
-
-
-
   renderTableData() {
     const { existData } = this.state;
     return existData.map((employee, index) => (
@@ -45,6 +40,7 @@ class FirstId extends Component {
         socialSecurityNumber={employee.socialSecurityNumberForFather}
         nationalIdForKid={employee.nationalIdForKid}
         requestedDate={employee.requestedDate}
+        link="/first/id/requests"
         {...this.props}
       />
     ));

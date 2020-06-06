@@ -156,7 +156,10 @@ class userDatails extends Component {
     const data = {
       socialsecuritynumber: socialSecurityNumber,
     };
-    axios.post(
+
+    console.log(data);
+
+    /* axios.post(
         "https://graduationproject1.herokuapp.com/id/user/acceptRenewId",
         data
       )
@@ -166,7 +169,9 @@ class userDatails extends Component {
       })
       .catch((error) => {
         console.log(error);
-      });
+      });*/
+
+
   };
 
   RejectRequestHandler = (event) => {

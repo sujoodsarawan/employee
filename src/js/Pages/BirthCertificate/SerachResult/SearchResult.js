@@ -10,7 +10,7 @@ class SearchResult extends Component {
     render() {
         return (
             <div>
-                
+                Hello
             </div>
         );
     }

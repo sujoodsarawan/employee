@@ -5,8 +5,7 @@ import TabelForm from '../../../Component/Tabel/Tabel';
 class OrderBirthCertificate extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-    
+        this.state = { 
           existData: [],
           loading: false
         };
@@ -33,13 +32,11 @@ class OrderBirthCertificate extends Component {
             index={index}
             key={employee._id}
             requestedDate={employee.requestedDate}
-            socialSecurityNumber={employee.socialSecurityNumber}
+            data={employee.nationalId}
             link="/order/birth/certificate"
             {...this.props}
           />
         ));
-
-        
       }
     
       render() {

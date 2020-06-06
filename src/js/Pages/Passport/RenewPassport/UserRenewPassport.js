@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from "axios";
-import FormInput from '../../../Component/FormInput/FormInput';
 import Form from '../../../Component/FormInput/Form';
-
+import FormInput from '../../../Component/FormInput/FormInput';
 
 
 const inputs = [
@@ -40,53 +39,37 @@ const inputs = [
       label: "National Id",
       disabled: true,
       required: true,
-    },
+    },    {
+        name: "passportId",
+        type: "text",
+        label: "Passport Id",
+        disabled: true,
+        required: true,
+      },
     {
-      name: "gender",
+      name: "passPortExpiryDate",
       type: "text",
-      label: "Gender",
+      label: "Passport Expiry Date",
       disabled: true,
       required: true,
     },
     {
-      name: "birthDate",
+      name: "passPortReleaseDate",
       type: "text",
-      label: "Birth Date",
+      label: "Passport Release Date",
+      disabled: true,
+      required: true,
+    }, {
+      name: "passportPlaceOfIssue",
+      type: "text",
+      label: "Pssport Place Of Issue",
       disabled: true,
       required: true,
     },
-    {
-      name: "birthPlace",
-      type: "text",
-      label: "Birth Place",
-      disabled: true,
-      required: true,
-    },
-    {
-      name: "motherFirstName",
-      type: "text",
-      label: "Mother Name",
-      disabled: true,
-      required: true,
-    },
-    {
-      name: "socialSecurityNumber",
-      type: "text",
-      label: "SSN",
-      disabled: true,
-      required: true,
-    },
-    {
-      name: "idExpiryDate",
-      type: "text",
-      label: "Expiry Date",
-      disabled: true,
-      required: true,
-    },
-  ];
   
+  ];
 
-class userDetail extends Component {
+class UserRenewPassport extends React.Component{
     constructor(props) {
         super(props);
         this.state = inputs.reduce(
@@ -99,14 +82,10 @@ class userDetail extends Component {
             tname: "",
             lname: "",
             nationalId: "",
-            gender: "",
-            birthDate: "",
-            birthPlace: "",
-            motherFirstName: "",
-            socialSecurityNumber: "",
-            idExpiryDate: "",
-            registrationPlace: "",
-            registrationNumber: "",
+            passPortExpiryDate: "",
+            passPortReleaseDate: "",
+            passportId: "",
+            passportPlaceOfIssue: "",
             loading:false,
             error:false
           }
@@ -114,14 +93,15 @@ class userDetail extends Component {
       }
     
       componentDidMount() {
-        const ssn = this.props.match.params.ssn;
-    
+        const ssn = this.props.match.params.id;
+        
+        
+
         axios
-          .get(
-            `https://graduationproject1.herokuapp.com/id/user/cetizineIdData/${ssn}`
+          .get(`https://graduationproject1.herokuapp.com/passport//getpassportdata/${ssn}`
           )
           .then((response) => {
-            const data = response.data.doc;
+          const data = response.data.doc;
             this.setState({
     
               loading:true,
@@ -130,14 +110,15 @@ class userDetail extends Component {
               tname: data.thirdName,
               lname: data.lastName,
               nationalId: data.nationalId,
-              gender: data.gender,
-              birthDate: data.birthDate,
-              birthPlace: data.birthPlace,
-              motherFirstName: data.motherFirstName,
-              socialSecurityNumber: data.socialSecurityNumber,
-              idExpiryDate: data.idExpiryDate,
+              passPortExpiryDate:data.passPortExpiryDate,
+              passPortReleaseDate:data.passPortReleaseDate,
+              passportId:data.passportId,
+              passportPlaceOfIssue:data.passportPlaceOfIssue,
+
+             
             });
             
+            console.log(response);
           })
           .catch((error) => {
            this.setState({
@@ -156,18 +137,20 @@ class userDetail extends Component {
       AcceptRequestHandler = (event) => {
         event.preventDefault();
     
-        const { socialSecurityNumber } = this.state;
+        const socialSecurityNumber = this.props.match.params.id;
+
         const data = {
           socialsecuritynumber: socialSecurityNumber,
         };
+    
         console.log(data);
-        axios
-          .post(
-            "https://graduationproject1.herokuapp.com/birthcertificate/acceptbirthcertificaterequest",
+        axios.post(
+            "https://graduationproject1.herokuapp.com/passport/acceptrenewpassport",
             data
           )
           .then((response) => {
             console.log(response);
+             this.props.history.push("/renew/passport");
           })
           .catch((error) => {
             console.log(error);
@@ -179,27 +162,30 @@ class userDetail extends Component {
       RejectRequestHandler = (event) => {
         event.preventDefault();
     
-        const { socialSecurityNumber } = this.state;
+        const  socialSecurityNumber  = this.props.match.params.id;
         const data = {
           socialsecuritynumber: socialSecurityNumber,
         };
         console.log(data);
-        /*axios
+        axios
           .post(
-            " https://graduationproject1.herokuapp.com/id/user/rejectRenewId",
+            "https://graduationproject1.herokuapp.com/passport/rejectrenewpassport",
             data
           )
           .then((response) => {
             console.log(response);
+            this.props.history.push("/renew/passport");
           })
           .catch((error) => {
             console.log(error);
-          });*/
+          });
       };
     
       render() {
     
         const {loading} = this.state;
+
+        console.log(this.state);
     
     
         const list = inputs.map((input) => {
@@ -214,12 +200,11 @@ class userDetail extends Component {
               disabled={input.disabled}
               required={input.required}
             />
-        
           );
         });
     
         const form =  loading ?  <Form
-        title="Order Birth Certificate"
+        title="Renew Passport "
         handelSubmit={this.handleSubmit}
         AcceptRequestHandler={this.AcceptRequestHandler}
         RejectRequestHandler={this.RejectRequestHandler}
@@ -235,6 +220,7 @@ class userDetail extends Component {
           </div>
         );
       }
+      
 }
 
-export default userDetail;
+export default UserRenewPassport;

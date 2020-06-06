@@ -3,20 +3,25 @@ import { Link } from "react-router-dom";
 
 const TabelForm = ({
   nationalIdForKid,
-  socialSecurityNumber,
+  data,
   requestedDate,
+  socialSecurityNumber,
+  flagServiceNoteBook,
   index,
-  link
+  image,
+  link,
 }) => {
+  console.log(flagServiceNoteBook)
+
   let RenewRequest = (
     <tr>
       <td>{index + 1}</td>
-      <td>{socialSecurityNumber}</td>
+      <td>{data}</td>
       <td>{requestedDate}</td>
       <td>
         <Link
-        //`/renew/id/requests/${socialSecurityNumber}`
-          to={`${link}/${socialSecurityNumber}`}
+          //`/renew/id/requests/${socialSecurityNumber}`
+          to={`${link}/${data}`}
           className="btn-info custom-button"
         >
           Info
@@ -28,13 +33,22 @@ const TabelForm = ({
   let FirstRequest = (
     <tr>
       <td>{index + 1}</td>
-      <td>{socialSecurityNumber}</td>
       <td>{nationalIdForKid}</td>
+      <td>
+        {socialSecurityNumber ? (
+          socialSecurityNumber
+        ) : (
+          <a href={`https://graduationproject1.herokuapp.com${flagServiceNoteBook}`}  target="_blank" rel="noopener noreferrer">
+            {" "}
+            <i className="fa fa-image" style={{fontSize:"25px" , color:"#2b5c7d"}}></i>
+          </a>
+        )}
+      </td>
       <td>{requestedDate}</td>
 
       <td>
         <Link
-          to={`/first/id/requests/${nationalIdForKid}`}
+          to={`${link}/${nationalIdForKid}`}
           className="btn-info custom-button"
         >
           Accept
