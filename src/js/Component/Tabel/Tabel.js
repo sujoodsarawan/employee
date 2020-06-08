@@ -38,7 +38,7 @@ const TabelForm = ({
         {socialSecurityNumber ? (
           socialSecurityNumber
         ) : (
-          <a href={`https://graduationproject1.herokuapp.com${flagServiceNoteBook}`}  target="_blank" rel="noopener noreferrer">
+          <a href={`https://graduationproject1.herokuapp.com${flagServiceNoteBook ? flagServiceNoteBook : image }`}  target="_blank" rel="noopener noreferrer">
             {" "}
             <i className="fa fa-image" style={{fontSize:"25px" , color:"#2b5c7d"}}></i>
           </a>

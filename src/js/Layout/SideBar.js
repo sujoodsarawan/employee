@@ -10,7 +10,7 @@ class SideBar extends Component {
           <li>
             <a href="#!" className="active">
               <span className="icon">
-                <i className="fas fa-book"></i>
+                <i className="fa fa-book"></i>
               </span>
               <span className="title">Books</span>
             </a>
@@ -18,7 +18,7 @@ class SideBar extends Component {
           <li>
             <Link to="/first/id/requests">
               <span className="icon">
-                <i className="fas fa-file-video"></i>
+                <i className="fa fa-file-video"></i>
               </span>
               <span className="title">
                 Home
@@ -28,7 +28,7 @@ class SideBar extends Component {
           <li>
             <Link to='/renew/id/requests'>
               <span className="icon">
-                <i className="fas fa-volleyball-ball"></i>
+                <i className="fa fa-volleyball-ball"></i>
               </span>
               <span className="title">Renew Id</span>
             </Link>
@@ -36,7 +36,7 @@ class SideBar extends Component {
           <li>
             <Link to='/order/birth/certificate'>
               <span className="icon">
-                <i className="fas fa-blog"></i>
+                <i className="fa fa-blog"></i>
               </span>
               <span className="title">Copy</span>
               </Link>
@@ -44,7 +44,7 @@ class SideBar extends Component {
           <li>
             <Link to='/child/birth/certificate'>
               <span className="icon">
-                <i className="fas fa-leaf"></i>
+                <i className="fa fa-leaf"></i>
               </span>
               <span className="title">Nature</span>
             </Link>
@@ -52,9 +52,33 @@ class SideBar extends Component {
           <li>
             <Link to='/renew/passport'>
               <span className="icon">
-                <i className="fas fa-leaf"></i>
+                <i className="fa fa-leaf"></i>
               </span>
               <span className="title">Renew Passport</span>
+            </Link>
+          </li>
+          <li>
+            <Link to='/new/passport'>
+              <span className="icon">
+                <i className="fa fa-leaf"></i>
+              </span>
+              <span className="title">New Passport</span>
+            </Link>
+          </li>
+          <li>
+            <Link to='/renew/family/book'>
+              <span className="icon">
+                <i className="fa fa-leaf"></i>
+              </span>
+              <span className="title">RenewFamilyBook</span>
+            </Link>
+          </li>
+          <li>
+            <Link to='/order/family/book'>
+              <span className="icon">
+                <i className="fa fa-leaf"></i>
+              </span>
+              <span className="title">OrderFamilyBook</span>
             </Link>
           </li>
         </ul>

@@ -14,8 +14,7 @@ class OrderBirthCertificate extends Component {
         let url = "https://graduationproject1.herokuapp.com/birthcertificate/getrequestedbirthcertificates";
         axios
           .get(url)
-          .then((response) => {
-    
+          .then((response) => {    
             this.setState({
               existData: response.data.doc,
               loading: true
@@ -46,7 +45,7 @@ class OrderBirthCertificate extends Component {
         let tabel = null;
     
         tabel = existData ? tabel = (
-          <table className="content-table" style={{ width: "76%", margin: "30px auto" }}>
+          <table className="content-table" style={{ width: "85%", margin: "30px auto" }}>
             <thead>
               <tr>
                 <th>Number</th>
@@ -58,9 +57,7 @@ class OrderBirthCertificate extends Component {
             <tbody>{this.renderTableData()}</tbody>
           </table>
         ) : <div style={{textAlign:"center"}}>No Requests</div>
-    
-    
-    
+
         return (
           <div>    
             <div className="main_container">
@@ -69,8 +66,6 @@ class OrderBirthCertificate extends Component {
           </div>
         );
       }
-
-      
 }
 
 export default OrderBirthCertificate;

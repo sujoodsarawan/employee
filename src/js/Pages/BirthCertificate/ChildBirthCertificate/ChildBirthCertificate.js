@@ -55,7 +55,7 @@ class ChildBirthCertificate extends Component {
       (tabel = (
         <table
           className="content-table"
-          style={{ width: "76%", margin: "30px auto" }}
+          style={{ width: "85%", margin: "30px auto" }}
         >
           <thead>
             <tr>

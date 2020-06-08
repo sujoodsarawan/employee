@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import axios from "axios";
 import Form from '../../../Component/FormInput/Form';
 import FormInput from '../../../Component/FormInput/FormInput';
@@ -69,8 +69,10 @@ const inputs = [
   
   ];
 
-class UserRenewPassport extends React.Component{
-    constructor(props) {
+
+
+class UserNewPassport extends React.Component{
+constructor(props) {
         super(props);
         this.state = inputs.reduce(
           (acc, input) => {
@@ -145,12 +147,12 @@ class UserRenewPassport extends React.Component{
     
         console.log(data);
         axios.post(
-            "https://graduationproject1.herokuapp.com/passport/acceptrenewpassport",
+            "https://graduationproject1.herokuapp.com/passport/acceptnewpassport",
             data
           )
           .then((response) => {
             console.log(response);
-             this.props.history.push("/renew/passport");
+             this.props.history.push("/new/passport");
           })
           .catch((error) => {
             console.log(error);
@@ -169,12 +171,12 @@ class UserRenewPassport extends React.Component{
         console.log(data);
         axios
           .post(
-            "https://graduationproject1.herokuapp.com/passport/rejectrenewpassport",
+            "https://graduationproject1.herokuapp.com/passport/rejectnewpassport",
             data
           )
           .then((response) => {
             console.log(response);
-            this.props.history.push("/renew/family/book");
+            this.props.history.push("/new/passport");
           })
           .catch((error) => {
             console.log(error);
@@ -220,7 +222,6 @@ class UserRenewPassport extends React.Component{
           </div>
         );
       }
-      
 }
 
-export default UserRenewPassport;
+export default UserNewPassport;

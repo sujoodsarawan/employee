@@ -1,55 +1,58 @@
-import React from "react";
-import TabelForm from "../../../Component/Tabel/Tabel";
+import React from 'react';
 import axios from "axios";
+import TabelForm from '../../../Component/Tabel/Tabel';
 
-class NewPassport extends React.Component{
+class RenewFamilyBook extends React.Component{
+
     constructor(props) {
         super(props);
         this.state = {
           existData: [],
           loading: false,
-          data:""
+          nationalIdForKid: "",
         };
       }
     
+      fetchDataHandler = () => {
     
+        console.log("fetchData , id ");
+    
+        axios
+          .get("https://graduationproject1.herokuapp.com/familybook/getallrenewrequestedfamilybooks")
+          .then((response) => {
+            this.setState({ existData: response.data.doc, loading: true });
+            console.log(response)
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+          console.log("fetchData , endid ");
+      };
     
       componentDidMount() {
-        axios
-          .get(
-            "https://graduationproject1.herokuapp.com/passport/getnewpassportrequests"
-          )
-          .then((response) => {
-            this.setState({
-              existData: response.data.doc,
-              loading: true,
-            });
-            console.log(response);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        this.fetchDataHandler();
+        console.log("componentDidMount , id")
       }
-    
       renderTableData() {
         const { existData } = this.state;
         return existData.map((employee, index) => (
+
           <TabelForm
-            index={index}
             key={employee._id}
+            index={index}
+            socialSecurityNumber={employee.familyBookId}
+            nationalIdForKid={employee.socialSecurityNumberForFather}
             requestedDate={employee.requestedDate}
-            nationalIdForKid={employee.socialSecurityNumber}
-            flagServiceNoteBook={employee.flagServiceNoteBook ? employee.flagServiceNoteBook.substring(7) : "Not"}
-          
-            link="/new/passport"
+            link="/renew/family/book"
             {...this.props}
           />
         ));
-
-    }
+      }
     
       render() {
         const { loading, existData } = this.state;
+    
+        console.log(loading)
     
         let tabel = null;
     
@@ -62,8 +65,8 @@ class NewPassport extends React.Component{
               <thead>
                 <tr>
                   <th>Number</th>
-                  <th>SocialSecurityNumber</th>
-                  <th>FlagServiceNoteBook</th>
+                  <th>Father's SSN</th>
+                  <th>Family BookId</th>
                   <th>Date</th>
                   <th>More Info</th>
                 </tr>
@@ -75,13 +78,10 @@ class NewPassport extends React.Component{
           <div style={{ textAlign: "center" }}>No Requests</div>
         );
     
-    
-    
         return (
           <div>
             <div className="main_container">
-    
-               {loading ? (
+              {loading ? (
                 tabel
               ) : (
                 <div style={{ textAlign: "center" }} className="loader">
@@ -89,13 +89,10 @@ class NewPassport extends React.Component{
                 </div>
               )}
     
-              
             </div>
           </div>
         );
       }
-
-
 }
 
-export default NewPassport;
+export default RenewFamilyBook;

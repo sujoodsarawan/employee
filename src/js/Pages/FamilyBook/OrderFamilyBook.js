@@ -1,8 +1,9 @@
-import React from "react";
-import TabelForm from "../../../Component/Tabel/Tabel";
+import React, { Component } from 'react';
 import axios from "axios";
+import TabelForm from '../../Component/Tabel/Tabel';
 
-class NewPassport extends React.Component{
+
+class OrderFamilyBook extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,14 +18,14 @@ class NewPassport extends React.Component{
       componentDidMount() {
         axios
           .get(
-            "https://graduationproject1.herokuapp.com/passport/getnewpassportrequests"
+            "https://graduationproject1.herokuapp.com/familybook/getallnewrequestedfamilybooks"
           )
           .then((response) => {
             this.setState({
               existData: response.data.doc,
               loading: true,
             });
-            console.log(response);
+            console.log(response.data.doc);
           })
           .catch((err) => {
             console.log(err);
@@ -33,20 +34,23 @@ class NewPassport extends React.Component{
     
       renderTableData() {
         const { existData } = this.state;
-        return existData.map((employee, index) => (
-          <TabelForm
-            index={index}
-            key={employee._id}
-            requestedDate={employee.requestedDate}
-            nationalIdForKid={employee.socialSecurityNumber}
-            flagServiceNoteBook={employee.flagServiceNoteBook ? employee.flagServiceNoteBook.substring(7) : "Not"}
-          
-            link="/new/passport"
-            {...this.props}
-          />
-        ));
+        return existData.map((employee, index) => {
+            return(
+             <TabelForm
+                index={index}
+                key={employee._id}
+                requestedDate={employee.socialSecurityNumberForWife}
+                nationalIdForKid={employee.socialSecurityNumberForHusband}
+                image={employee.marrageContract.substring(7) }
+                link="/order/family/book"
+                {...this.props}
+              />
+            )
 
-    }
+        }
+
+        );
+      }
     
       render() {
         const { loading, existData } = this.state;
@@ -62,9 +66,9 @@ class NewPassport extends React.Component{
               <thead>
                 <tr>
                   <th>Number</th>
-                  <th>SocialSecurityNumber</th>
-                  <th>FlagServiceNoteBook</th>
-                  <th>Date</th>
+                  <th>Husband'SSN</th>
+                  <th>Marrage Contract</th>
+                  <th>Wife's SSN</th>
                   <th>More Info</th>
                 </tr>
               </thead>
@@ -74,8 +78,6 @@ class NewPassport extends React.Component{
         ) : (
           <div style={{ textAlign: "center" }}>No Requests</div>
         );
-    
-    
     
         return (
           <div>
@@ -94,8 +96,6 @@ class NewPassport extends React.Component{
           </div>
         );
       }
-
-
 }
 
-export default NewPassport;
+export default OrderFamilyBook;

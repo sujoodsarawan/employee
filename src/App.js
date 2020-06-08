@@ -13,6 +13,12 @@ import ChildBirthDetails from "./js/Pages/BirthCertificate/ChildBirthCertificate
 import SearchResult from "./js/Pages/BirthCertificate/SerachResult/SearchResult";
 import RenewPassport from "./js/Pages/Passport/RenewPassport/RenewPassport";
 import UserRenewPassport from "./js/Pages/Passport/RenewPassport/UserRenewPassport";
+import NewPassport from "./js/Pages/Passport/NewPassport/NewPassport";
+import UserNewPassport from "./js/Pages/Passport/NewPassport/UserNewPassport";
+import RenewFamilyBook from "./js/Pages/FamilyBook/RenewFamilyBook/RenewFamilyBook";
+import RenewFamilyBookDetails from "./js/Pages/FamilyBook/RenewFamilyBook/RenewFamilyBookDetails";
+import OrderFamilyBook from "./js/Pages/FamilyBook/OrderFamilyBook";
+import OrderFamilyBookDetails from "./js/Pages/FamilyBook/OrderFamilyBookDetails";
 
 
 class App extends React.Component {
@@ -20,7 +26,6 @@ class App extends React.Component {
     return (
       <div className="header">
         <Navbar />
-
         <Switch>
           <Route exact path="/renew/id/requests" component={RenewId} />
           <Route exact path="/renew/id/requests/:ssn" component={userDatails} />
@@ -34,7 +39,12 @@ class App extends React.Component {
           <Route path="birth/search/result/:term"  component={SearchResult}/>
           <Route exact path="/renew/passport" component={RenewPassport}/>
           <Route exact path="/renew/passport/:id" component={UserRenewPassport} />
-
+          <Route exact path="/new/passport" component={NewPassport}/>
+          <Route exact path="/new/passport/:id" component={UserNewPassport}/>
+          <Route exact path='/renew/family/book' component={RenewFamilyBook}/>
+          <Route exact path='/renew/family/book/:id' component={RenewFamilyBookDetails}/>
+          <Route exact path='/order/family/book' component={OrderFamilyBook}/>
+          <Route exact path='/order/family/book/:id' component={OrderFamilyBookDetails}/>
 
           <Redirect from="/" to="/first/id/requests" component={FirstId} />
         </Switch>
