@@ -4,14 +4,19 @@ import { Link } from "react-router-dom";
 const TabelForm = ({
   nationalIdForKid,
   data,
+  nationalid,
   requestedDate,
+  email,
+  isAdmin,
   socialSecurityNumber,
   flagServiceNoteBook,
+  department,
   index,
   image,
   link,
+  deleteEmployeeHandler
 }) => {
-  console.log(flagServiceNoteBook)
+  let admin = isAdmin ? "true" :"false"; 
 
   let RenewRequest = (
     <tr>
@@ -56,6 +61,37 @@ const TabelForm = ({
       </td>
     </tr>
   );
-  return nationalIdForKid ? FirstRequest : RenewRequest;
+
+  let employee = (
+    <tr>
+    <td>{index + 1}</td>
+    <td>{nationalid}</td>
+    <td>{department}</td>
+    <td>{email}</td>
+  <td>{admin}</td>
+    <td>
+      <Link
+        to={`${link}/${nationalid}`}
+        className="btn-info custom-button" 
+        style={{padding:"13px 0"}}
+     >
+        Change
+      </Link>
+    </td>
+    <td>
+    <button
+        className="btn-delete custom-button btn-width"
+        style={{ width: "80px" }}
+        onClick={deleteEmployeeHandler}
+      >
+        Delete
+      </button>
+    </td>
+
+  </tr>
+
+  )
+
+  return department ? employee :nationalIdForKid ? FirstRequest : RenewRequest;
 };
 export default TabelForm;

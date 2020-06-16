@@ -19,6 +19,9 @@ import RenewFamilyBook from "./js/Pages/FamilyBook/RenewFamilyBook/RenewFamilyBo
 import RenewFamilyBookDetails from "./js/Pages/FamilyBook/RenewFamilyBook/RenewFamilyBookDetails";
 import OrderFamilyBook from "./js/Pages/FamilyBook/OrderFamilyBook";
 import OrderFamilyBookDetails from "./js/Pages/FamilyBook/OrderFamilyBookDetails";
+import ViewALLEmployee from "./js/Pages/Admin/ViewAllEmployee";
+import ChangeEmployeeStatus from "./js/Pages/Admin/ChangeEmployeeStatus";
+import AddEmployee from "./js/Pages/Admin/AddEmployee";
 
 
 class App extends React.Component {
@@ -45,7 +48,9 @@ class App extends React.Component {
           <Route exact path='/renew/family/book/:id' component={RenewFamilyBookDetails}/>
           <Route exact path='/order/family/book' component={OrderFamilyBook}/>
           <Route exact path='/order/family/book/:id' component={OrderFamilyBookDetails}/>
-
+          <Route exact path='/get/all/employee' component={ViewALLEmployee}/>
+          <Route exact path='/change/employee/status/:id' component={ChangeEmployeeStatus}/>
+          <Route exact path='/add/employee' component={AddEmployee}/>
           <Redirect from="/" to="/first/id/requests" component={FirstId} />
         </Switch>
       </div>

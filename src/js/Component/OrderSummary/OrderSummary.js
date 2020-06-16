@@ -1,9 +1,9 @@
 import React from "react";
 
-const OrderSummary = ({ post, RedirectHandler, title, status }) => {
+const OrderSummary = ({ post, RedirectHandler, title, status}) => {
   return (
     <div className="ordersummary">
-      <div className="u-margin-bottom-small2 " style={{ textAlign: "center" }}>
+      <div className="u-margin-bottom-small2 " style={{ textAlign: "center" }}>    
         {status === 200 ? (
           <div>
             <i className="fa fa-check-circle Check"></i>
