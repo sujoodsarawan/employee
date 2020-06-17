@@ -38,7 +38,7 @@ class Navbar extends Component {
             <div className="three"></div>
           </div>
           <div className="top_menu">
-            <div className="logo">logo</div>
+            <div className="logo">Jordan Civil Status and Passport Department</div>
             <ul>
               <li>
                 <form onSubmit={this.submitHandler}>
