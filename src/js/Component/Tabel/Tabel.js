@@ -22,7 +22,7 @@ const TabelForm = ({
     <tr>
       <td>{index + 1}</td>
       <td>{data}</td>
-      <td>{requestedDate}</td>
+      <td>{new Date(requestedDate).toDateString()}</td>
       <td>
         <Link
           //`/renew/id/requests/${socialSecurityNumber}`
@@ -49,7 +49,7 @@ const TabelForm = ({
           </a>
         )}
       </td>
-      <td>{requestedDate}</td>
+        <td>{requestedDate}</td>
 
       <td>
         <Link

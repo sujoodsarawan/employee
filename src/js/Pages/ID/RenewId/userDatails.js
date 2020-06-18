@@ -114,7 +114,7 @@ class userDatails extends Component {
     const ssn = this.props.match.params.ssn;
     axios
       .get(
-        `https://graduationproject1.herokuapp.com/id/user/cetizineIdData/${ssn}`
+        `https://graduationproject1.herokuapp.com/admin/getuserbyssn/${ssn}`
       )
       .then((response) => {
         const data = response.data.doc;
@@ -127,11 +127,11 @@ class userDatails extends Component {
           lname: data.lastName,
           nationalId: data.nationalId,
           gender: data.gender,
-          birthDate: data.birthDate,
+          birthDate:new Date(data.birthDate).toDateString(),
           birthPlace: data.birthPlace,
           motherFirstName: data.motherFirstName,
           socialSecurityNumber: data.socialSecurityNumber,
-          idExpiryDate: data.idExpiryDate,
+          idExpiryDate:new Date( data.idExpiryDate).toDateString(),
         });
         
       })
@@ -153,23 +153,15 @@ class userDatails extends Component {
     event.preventDefault();
 
     const { socialSecurityNumber } = this.state;
-    const data = {
-      socialsecuritynumber: socialSecurityNumber,
-    };
-
-    console.log(data);
-
-    /* axios.post(
-        "https://graduationproject1.herokuapp.com/id/user/acceptRenewId",
-        data
-      )
+   axios.delete(
+        `https://graduationproject1.herokuapp.com/id/deleteRequestedId/${socialSecurityNumber}` )
       .then((response) => {
         console.log(response);
-      //  this.props.history.push("/renew/id/requests");
+       this.props.history.push("/renew/id/requests");
       })
       .catch((error) => {
         console.log(error);
-      });*/
+      });
 
 
   };
@@ -178,19 +170,15 @@ class userDatails extends Component {
     event.preventDefault();
 
     const { socialSecurityNumber } = this.state;
-    const data = {
-      socialsecuritynumber: socialSecurityNumber,
-    };
-    console.log(data);
+
+
     axios
       .post(
-        " https://graduationproject1.herokuapp.com/id/user/rejectRenewId",
-        data
-      )
+        `https://graduationproject1.herokuapp.com/id/deleteRequestedId/${socialSecurityNumber}`)
       .then((response) => {
         console.log(response);
         this.props.history.push("/renew/id/requests");
-      })/////////////////
+      })
       .catch((error) => {
         console.log(error);
       });

@@ -80,7 +80,7 @@ class userBirthDetails extends Component {
   }
   componentDidMount() {
     const id = this.props.match.params.id;
-    axios.get(`https://graduationproject1.herokuapp.com/birthcertificate/getcitizinebirthcertificateinformation/${id}`)
+    axios.get(`https://graduationproject1.herokuapp.com/admin/getuserbynationalid/${id}`)
       .then(res => {
         console.log(res)
         const data = res.data.doc;
@@ -91,9 +91,9 @@ class userBirthDetails extends Component {
           sname: data.secondName,
           tname: data.thirdName,
           lname: data.lastName,
-          birthDate: data.birthDate,
+          birthDate: new Date(data.birthDate).toDateString(),
           nationalId: data.nationalId,
-          birthCertificateReleaseDate: data.birthCertificateReleaseDate,
+          birthCertificateReleaseDate:new Date(data.birthCertificateReleaseDate).toDateString(),
           Post: data.message,
           status: data.status,
         });
@@ -113,13 +113,12 @@ class userBirthDetails extends Component {
   AcceptRequestHandler = (event) => {
     event.preventDefault();
     const { nationalId } = this.state;
-    const data = { nationalid: nationalId };
-    console.log(data);
-    axios.post("https://graduationproject1.herokuapp.com/birthcertificate/acceptbirthcertificaterequest", data)
+
+    axios.delete(`https://graduationproject1.herokuapp.com/birthcertificate/deleteRequestedBirthCertificate/${nationalId}`)
       .then((response) => {
         console.log(response)
         this.setState({
-          Post: response.data.message,
+          Post: "Email Sent ",
           status: response.status,
           complete: true,
         })
@@ -135,11 +134,11 @@ class userBirthDetails extends Component {
 
     console.log(data);
 
-    axios.post("https://graduationproject1.herokuapp.com/birthcertificate/rejectbirthcertificaterequest", data)
+    axios.delete(`https://graduationproject1.herokuapp.com/birthcertificate/deleteRequestedBirthCertificateForChild/${nationalId}`)
       .then((response) => {
         console.log(response)
         this.setState({
-          Post: response.data.message,
+          Post: "Email Sent",
           status: response.status,
           complete: true,
         })
@@ -176,8 +175,9 @@ class userBirthDetails extends Component {
       <OrderSummary
         title="Order Birth Certificate"
         post={Post}
+        status={status}
         RedirectHandler={
-          status === 200 ? this.RedirectHandler : this.StayOnPageHandler
+         status === 200 ? this.RedirectHandler : this.StayOnPageHandler
         }
       />)
     const form = loading ? <Form
@@ -186,6 +186,7 @@ class userBirthDetails extends Component {
       AcceptRequestHandler={this.AcceptRequestHandler}
       RejectRequestHandler={this.RejectRequestHandler}
       list={list}
+
     /> : <div className="loader">loading ..</div>
     return (
       <div>

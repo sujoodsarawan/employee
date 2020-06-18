@@ -24,10 +24,9 @@ export const authFail = (error) => {
 };
 
 export const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('department');
-    localStorage.removeItem('isAdmin');
-
+  localStorage.removeItem('token');
+  localStorage.removeItem('department');
+  localStorage.removeItem('isAdmin');
   return {
     type: actionTypes.AUTH_LOGOUT,
   };
@@ -47,9 +46,7 @@ export const auth = (email, password) => {
   console.log(email,password);
   return (dispatch) => {
     dispatch(authStart());
-   
       const url = "https://graduationproject1.herokuapp.com/admin/emplogin";
-
        const authData = {
         nationalid: email,
         password: password,
@@ -58,11 +55,10 @@ export const auth = (email, password) => {
      axios.post(url, authData)
      .then((response) => {
        console.log(response);
-       localStorage.setItem('token' , response.data.token);
-       localStorage.setItem('department' , response.data.department);
-       localStorage.setItem('isAdmin' , response.data.isAdmin);
+        localStorage.setItem('token',response.data.token);
+        localStorage.setItem('department' , response.data.department)
+        localStorage.setItem('isAdmin' , response.data.isAdmin);
 
-       
        dispatch(authSuccess(response.data.token , response.data.department , response.data.isAdmin));
      //  dispatch(checkAuthTimeOut(response.data.expireTime))
      })
@@ -79,3 +75,16 @@ export const auth = (email, password) => {
     };
 
 
+    export const authCheckState =()=>{
+      return dispatch=>{
+          const token = localStorage.getItem('token');
+          if(!token){
+              dispatch(logout())
+          }else{
+              const department = localStorage.getItem('department');
+              const isAdmin = localStorage.getItem('isAdmin');
+              dispatch(authSuccess(token , department ,isAdmin));
+          }
+      }
+  }
+    

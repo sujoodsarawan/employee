@@ -98,7 +98,7 @@ class UserRenewPassport extends React.Component{
         
 
         axios
-          .get(`https://graduationproject1.herokuapp.com/passport//getpassportdata/${ssn}`
+          .get(`https://graduationproject1.herokuapp.com/admin/getuserbyssn/${ssn}`
           )
           .then((response) => {
           const data = response.data.doc;
@@ -139,15 +139,8 @@ class UserRenewPassport extends React.Component{
     
         const socialSecurityNumber = this.props.match.params.id;
 
-        const data = {
-          socialsecuritynumber: socialSecurityNumber,
-        };
-    
-        console.log(data);
-        axios.post(
-            "https://graduationproject1.herokuapp.com/passport/acceptrenewpassport",
-            data
-          )
+        
+        axios.delete(`https://graduationproject1.herokuapp.com/passport/deleteRequestedRenewpassport/${socialSecurityNumber}`)
           .then((response) => {
             console.log(response);
              this.props.history.push("/renew/passport");
@@ -167,11 +160,7 @@ class UserRenewPassport extends React.Component{
           socialsecuritynumber: socialSecurityNumber,
         };
         console.log(data);
-        axios
-          .post(
-            "https://graduationproject1.herokuapp.com/passport/rejectrenewpassport",
-            data
-          )
+        axios.delete(`https://graduationproject1.herokuapp.com/passport/deleteRequestedRenewpassport/${socialSecurityNumber}`)
           .then((response) => {
             console.log(response);
             this.props.history.push("/renew/family/book");

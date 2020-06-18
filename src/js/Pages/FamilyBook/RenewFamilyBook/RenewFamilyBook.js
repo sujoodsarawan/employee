@@ -42,7 +42,7 @@ class RenewFamilyBook extends React.Component{
             index={index}
             socialSecurityNumber={employee.familyBookId}
             nationalIdForKid={employee.socialSecurityNumberForFather}
-            requestedDate={employee.requestedDate}
+            requestedDate={new Date(employee.requestedDate).toDateString()}
             link="/renew/family/book"
             {...this.props}
           />

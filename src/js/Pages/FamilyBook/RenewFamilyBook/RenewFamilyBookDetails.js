@@ -31,7 +31,10 @@ class RenewFamilyBookDetails extends React.Component {
           {
             socialsecuritynumberforfather: "",
             familybookid:"",
-            familybookplaceofissue:""
+            familybookplaceofissue:"",
+            both:false,
+            family:false,
+            father:false
           }
         );
       }
@@ -45,12 +48,27 @@ class RenewFamilyBookDetails extends React.Component {
     
       AcceptRequestHandler = (e) => {
         e.preventDefault();
-        
-        const data = this.state;
-    
-        console.log(data);
+
+        if(this.state.familybookid.length !== 6 && this.state.socialsecuritynumberforfather.length !== 8){
+          this.setState({
+            both: true
+          })
+        }else if(this.state.familybookid.length !== 6){
+          this.setState({
+            family: true
+          })
+        }else if(this.state.socialsecuritynumberforfather.length !== 8){
+          this.setState({
+            father: true
+          })
+        }else{
+          this.setState({
+            both:false,
+            family:false,
+            father:false
+          })
        axios
-          .post(`https://graduationproject1.herokuapp.com/familyBook/renewfamilybook`, data)
+          .delete(`https://graduationproject1.herokuapp.com/familyBook/deleteRenewRequestedFamilyBook/${this.state.familybookid}`)
           .then((response) => {
             console.log(response);
         ///renew/family/book
@@ -59,7 +77,7 @@ class RenewFamilyBookDetails extends React.Component {
           })
           .catch((error) => {
             console.log(error);
-          });
+          });}
       };
 
       RejectRequestHandler = (e)=>{
@@ -68,7 +86,7 @@ class RenewFamilyBookDetails extends React.Component {
     
         console.log(data);
        axios
-          .post(`https://graduationproject1.herokuapp.com/familybook/rejectrenewfamilybook`, data)
+          .delete(`https://graduationproject1.herokuapp.com/familyBook/deleteRenewRequestedFamilyBook/${this.state.familybookid}`)
           .then((response) => {
             console.log(response);
             this.props.history.push("/renew/family/book");
@@ -81,6 +99,19 @@ class RenewFamilyBookDetails extends React.Component {
     
       render() {
        
+        const {family , both , father} = this.state;
+
+        let message = null;
+
+        if(both){
+         message = <div style={{color:"#F00" , textAlign:"center" , marginBottom:"20px",fontWeight:"500"}}> Oops!! Social Security Numbers for Father must be 8 digits and Family Book Id must be 6 numbers</div>
+
+        }if(father){
+          message = <div style={{color:"#F00" , textAlign:"center" , marginBottom:"20px",fontWeight:"500"}}> Oops!! Social Security Numbers for Father must be 8 digits</div>
+        }if(family){
+         message = <div style={{color:"#F00" , textAlign:"center" , marginBottom:"20px",fontWeight:"500"}}> Oops!! Family Book Id must be 6 numbers</div>
+
+        }
     
         const list = inputs.map((input) => {
           return (
@@ -105,6 +136,7 @@ class RenewFamilyBookDetails extends React.Component {
                 AcceptRequestHandler={this.AcceptRequestHandler}
                 RejectRequestHandler={this.RejectRequestHandler}
                 list={list}
+                message={message}
             />
           </div>
         );

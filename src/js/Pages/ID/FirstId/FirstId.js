@@ -39,7 +39,7 @@ class FirstId extends Component {
         index={index}
         socialSecurityNumber={employee.socialSecurityNumberForFather}
         nationalIdForKid={employee.nationalIdForKid}
-        requestedDate={employee.requestedDate}
+        requestedDate={new Date(employee.requestedDate).toDateString()}
         link="/first/id/requests"
         {...this.props}
       />

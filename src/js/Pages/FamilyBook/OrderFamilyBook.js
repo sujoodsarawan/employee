@@ -40,8 +40,7 @@ class OrderFamilyBook extends Component {
                 index={index}
                 key={employee._id}
                 requestedDate={employee.socialSecurityNumberForWife}
-                nationalIdForKid={employee.socialSecurityNumberForHusband}
-                image={employee.marrageContract.substring(7) }
+                data={employee.socialSecurityNumberForHusband}
                 link="/order/family/book"
                 {...this.props}
               />
@@ -67,7 +66,6 @@ class OrderFamilyBook extends Component {
                 <tr>
                   <th>Number</th>
                   <th>Husband'SSN</th>
-                  <th>Marrage Contract</th>
                   <th>Wife's SSN</th>
                   <th>More Info</th>
                 </tr>

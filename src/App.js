@@ -23,20 +23,26 @@ import ViewALLEmployee from "./js/Pages/Admin/ViewAllEmployee";
 import ChangeEmployeeStatus from "./js/Pages/Admin/ChangeEmployeeStatus";
 import AddEmployee from "./js/Pages/Admin/AddEmployee";
 import Login from "./js/Pages/Login/Login";
+import * as actions from './js/store/action/index';
 import Logout from "./js/Pages/Login/Logout";
-
 import { withRouter } from "react-router-dom";
-
 import { connect } from "react-redux";
 
+
 class App extends React.Component {
+
+  componentDidMount() {
+    this.props.onTryAutoSignUp();
+  }
   render() {
     let routes = (
       <Switch>
         <Route exact path="/auth" component={Login} />
+      
+        <Redirect from="/" to="/auth" component={Login} />
+
       </Switch>
     );
-
     if (this.props.isAuthenticated && this.props.isAdmin) {
       routes = (
         <Switch>
@@ -45,10 +51,10 @@ class App extends React.Component {
             exact
             path="/change/employee/status/:id"
             component={ChangeEmployeeStatus}
-          />
+          />   
           <Route exact path="/add/employee" component={AddEmployee} />
           <Route exact path="/logout" component={Logout} />
-          <Redirect from="/" to="/get/all/employee" component={Login} />
+          <Redirect from="/" to="/get/all/employee" component={ViewALLEmployee} />
         </Switch>
       );
     } else if (!this.props.isAdmin && this.props.department === "idcard") {
@@ -63,7 +69,7 @@ class App extends React.Component {
           <Redirect from="/" to="/first/id/requests" component={FirstId} />
         </Switch>
       );
-    } else if (!this.props.isAdmin && this.props.department === "passoprt") {
+    } else if (!this.props.isAdmin && this.props.department === "passport") {
       routes = (
         <Switch>
           <Route exact path="/renew/passport" component={RenewPassport} />
@@ -96,7 +102,11 @@ class App extends React.Component {
             component={OrderFamilyBookDetails}
           />
           <Route exact path="/logout" component={Logout} />
-          <Redirect from="/" to="/order/family/book" component={OrderFamilyBook} />
+          <Redirect
+            from="/"
+            to="/order/family/book"
+            component={OrderFamilyBook}
+          />
         </Switch>
       );
     }
@@ -129,7 +139,11 @@ class App extends React.Component {
           />
           <Route path="birth/search/result/:term" component={SearchResult} />
           <Route exact path="/logout" component={Logout} />
-          <Redirect from="/" to="/order/birth/certificate" component={OrderBirthCertificate} />
+          <Redirect
+            from="/"
+            to="/order/birth/certificate"
+            component={OrderBirthCertificate}
+          />
         </Switch>
       );
     }
@@ -151,4 +165,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(App));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onTryAutoSignUp: () => dispatch(actions.authCheckState()),
+  };
+};
+
+
+export default withRouter(connect(mapStateToProps , mapDispatchToProps)(App));

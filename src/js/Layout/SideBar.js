@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 class SideBar extends Component {
   render() {
-    console.log("SideBar", this.props.department, this.props.isAdmin);
 
     return (
       <div className="sidebar">

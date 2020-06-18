@@ -7,6 +7,7 @@ const Form = ({
   RejectRequestHandler,
   list,
   title,
+  message
 }) => {
   return (
     <section className="order-section">
@@ -18,6 +19,7 @@ const Form = ({
           <div className="card-body">
             <form>
               {list}
+              {message}
               {button === 1 ? (
                 <div style={{ textAlign: "center", marginTop: "1rem" }}>
                   <div className="u-margin-top-big">

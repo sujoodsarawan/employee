@@ -100,7 +100,7 @@ constructor(props) {
         
 
         axios
-          .get(`https://graduationproject1.herokuapp.com/passport//getpassportdata/${ssn}`
+          .get(`https://graduationproject1.herokuapp.com/admin/getuserbyssn/${ssn}`
           )
           .then((response) => {
           const data = response.data.doc;
@@ -112,8 +112,8 @@ constructor(props) {
               tname: data.thirdName,
               lname: data.lastName,
               nationalId: data.nationalId,
-              passPortExpiryDate:data.passPortExpiryDate,
-              passPortReleaseDate:data.passPortReleaseDate,
+              passPortExpiryDate:new Date(data.passPortExpiryDate).toDateString(),
+              passPortReleaseDate:new Date(data.passPortReleaseDate).toDateString(),
               passportId:data.passportId,
               passportPlaceOfIssue:data.passportPlaceOfIssue,
 
@@ -140,16 +140,7 @@ constructor(props) {
         event.preventDefault();
     
         const socialSecurityNumber = this.props.match.params.id;
-
-        const data = {
-          socialsecuritynumber: socialSecurityNumber,
-        };
-    
-        console.log(data);
-        axios.post(
-            "https://graduationproject1.herokuapp.com/passport/acceptnewpassport",
-            data
-          )
+        axios.delete(`https://graduationproject1.herokuapp.com/passport/deleteRequestedNewpassport/${socialSecurityNumber}`)
           .then((response) => {
             console.log(response);
              this.props.history.push("/new/passport");
@@ -165,15 +156,8 @@ constructor(props) {
         event.preventDefault();
     
         const  socialSecurityNumber  = this.props.match.params.id;
-        const data = {
-          socialsecuritynumber: socialSecurityNumber,
-        };
-        console.log(data);
-        axios
-          .post(
-            "https://graduationproject1.herokuapp.com/passport/rejectnewpassport",
-            data
-          )
+        
+        axios.delete(`https://graduationproject1.herokuapp.com/passport/deleteRequestedNewpassport/${socialSecurityNumber}`)
           .then((response) => {
             console.log(response);
             this.props.history.push("/new/passport");

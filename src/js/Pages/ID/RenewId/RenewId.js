@@ -44,7 +44,7 @@ class RenewId extends Component {
       <TabelForm
         index={index}
         key={employee._id}
-        requestedDate={employee.requestedDate}
+        requestedDate={new Date(employee.requestedDate).toDateString()}
         data={employee.socialSecurityNumber}
         link="/renew/id/requests"
         {...this.props}

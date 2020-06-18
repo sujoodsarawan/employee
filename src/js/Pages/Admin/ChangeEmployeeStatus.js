@@ -27,7 +27,7 @@ class ChangeEmployeeStatus extends React.Component{
           },
           {
             nationalid: "",
-            department: "",
+            department: "idcard",
             loading:true,
             complete: false,
             Post:'',

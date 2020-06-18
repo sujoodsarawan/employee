@@ -38,10 +38,8 @@ class RenewPassport extends Component {
           <TabelForm
             index={index}
             key={employee._id}
-            requestedDate={employee.requestedDate}
-            nationalIdForKid={employee.socialSecurityNumber}
-            flagServiceNoteBook={employee.flagServiceNoteBook ? employee.flagServiceNoteBook.substring(7) : "Not"}
-          
+            requestedDate={new Date(employee.requestedDate).toDateString()}
+            data={employee.socialSecurityNumber}        
             link="/renew/passport"
             {...this.props}
           />
@@ -63,7 +61,6 @@ class RenewPassport extends Component {
                 <tr>
                   <th>Number</th>
                   <th>SocialSecurityNumber</th>
-                  <th>FlagServiceNoteBook</th>
                   <th>Date</th>
                   <th>More Info</th>
                 </tr>

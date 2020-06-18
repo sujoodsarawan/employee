@@ -12,6 +12,7 @@ class ViewALLEmployee extends React.Component {
           loading: false,
           data:"",
           complete:false,
+          Post:''
         };
       }
     
@@ -56,8 +57,14 @@ class ViewALLEmployee extends React.Component {
 
 
 
+      
+  RedirectHandler = () => {this.props.history.replace("/");};
+
+  StayOnPageHandler = () => {this.setState({ complete: false });};
 
       DeleteEmployee =(Nationalid)=>{
+       
+       
         console.log("delete" , Nationalid);
 
         axios.delete(`https://graduationproject1.herokuapp.com/admin/empid/${Nationalid}`)
@@ -65,8 +72,12 @@ class ViewALLEmployee extends React.Component {
           console.log(response)
           this.setState({
             complete:true,
-            status:response.status
+            status:response.status,
+            Post:response.data.message
+
           })
+
+        
         })
         .catch(error=>{
           console.log(error)
@@ -77,7 +88,7 @@ class ViewALLEmployee extends React.Component {
       }
     
       render() {
-        const { loading, existData , complete } = this.state;
+        const { loading, existData , complete , status , Post } = this.state;
     
         let tabel = null;
     
@@ -111,11 +122,11 @@ class ViewALLEmployee extends React.Component {
 
         Order = 
         <OrderSummary
-        title="DELETE CONFIRM"
-        post="Are you sure to delete the employee ? "
-        btnYes = {this.DeleteEmployee}
-        btnNo = {this.CancleDelete}
-        deleteemp="yes"
+        title="DELETE Request"
+        post={Post}
+        status={status}
+        RedirectHandler={
+        status === 200 ? this.RedirectHandler : this.StayOnPageHandler}
 
         />
     

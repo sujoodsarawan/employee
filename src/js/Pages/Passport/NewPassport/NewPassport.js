@@ -37,10 +37,8 @@ class NewPassport extends React.Component{
           <TabelForm
             index={index}
             key={employee._id}
-            requestedDate={employee.requestedDate}
-            nationalIdForKid={employee.socialSecurityNumber}
-            flagServiceNoteBook={employee.flagServiceNoteBook ? employee.flagServiceNoteBook.substring(7) : "Not"}
-          
+            requestedDate={new Date(employee.requestedDate).toDateString()}
+            data={employee.socialSecurityNumber}          
             link="/new/passport"
             {...this.props}
           />
@@ -63,7 +61,6 @@ class NewPassport extends React.Component{
                 <tr>
                   <th>Number</th>
                   <th>SocialSecurityNumber</th>
-                  <th>FlagServiceNoteBook</th>
                   <th>Date</th>
                   <th>More Info</th>
                 </tr>

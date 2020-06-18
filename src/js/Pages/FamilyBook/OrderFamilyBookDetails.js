@@ -59,7 +59,7 @@ class OrderFamilyBookDetails extends React.Component{
     
         console.log(data);
        axios
-          .post(`https://graduationproject1.herokuapp.com/familyBook/acceptaddfamilybook`, data)
+          .delete(`https://graduationproject1.herokuapp.com/familyBook/deleteAddRequestedFamilyBook/${this.state.socialsecuritynumberforhusband}`)
           .then((response) => {
             console.log(response);
         ///renew/family/book
@@ -77,7 +77,7 @@ class OrderFamilyBookDetails extends React.Component{
     
         console.log(data);
        axios
-          .post(`https://graduationproject1.herokuapp.com/familybook/rejectaddfamilybook`, data)
+          .delete(`https://graduationproject1.herokuapp.com/familyBook/deleteAddRequestedFamilyBook/${this.state.socialsecuritynumberforhusband}`)
           .then((response) => {
             console.log(response);
             this.props.history.push("/order/family/book");

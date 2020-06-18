@@ -18,7 +18,8 @@ class Login extends Component {
                 value: '',
                 validation:{
                     required:true,
-                    isEmail:false
+                    minLength:10
+
                 },
                 valid:false,
                 touched:false,
@@ -39,7 +40,9 @@ class Login extends Component {
               },
         },
         isSignup : true,
-    }
+        error:false
+    
+      }
     
     
       checkValidity(value, rules) {
@@ -89,9 +92,15 @@ class Login extends Component {
     
       submitHandler = (event) => {
         event.preventDefault();
-        console.log(this.state.controls.email.value , this.state.controls.password.value) 
-        this.props.onAuth(this.state.controls.email.value ,this.state.controls.password.value)
-    
+        console.log(this.state.controls.email.value , this.state.controls.password.value) ;
+
+        if(this.state.controls.email.value.length !== 10){
+            this.setState({
+              error:true,
+            })
+        }else{ 
+             this.props.onAuth(this.state.controls.email.value ,this.state.controls.password.value)
+        }
       };
     
     
@@ -103,10 +112,7 @@ class Login extends Component {
             id: key,
             config: this.state.controls[key],
           });
-        }
-    
-    
-        
+        }      
     
     
         let form = formElementArray.map((formElement) => (
@@ -120,11 +126,8 @@ class Login extends Component {
             touched={formElement.config.touched}
             changed={(event) => this.inputChangeHandler(event, formElement.id)}
           />
-        ));;
-        
-    
+        ));;  
 
-        
        
         if(this.props.loading){
           form = <div className="loader">loading ...</div>
@@ -137,11 +140,18 @@ class Login extends Component {
           <p>{this.props.error.message}</p>
           )
         }
+
+
+        let message =null;
+
+        if(this.state.error){
+          message = <div style={{color:"#F00" , textAlign:"center" , marginBottom:"20px",fontWeight:"500"}}> Oops!! National Id must be 10 numbers</div>
+          
+        }
     
         let authenticated = null;
-        if(this.props.isAuhthenticated && this.props.isAdmin){
+        if(this.props.isAdmin ){
          authenticated = <Redirect to='/get/all/employee'/>
-         
         }else{
           if(this.props.department === "idcard"){
             authenticated = <Redirect to='/first/id/requests'/>
@@ -151,7 +161,6 @@ class Login extends Component {
             authenticated=<Redirect to="/new/passport"/>
           }else if(this.props.department === "birthcertificate "){
             authenticated=<Redirect to="/order/birth/certificate"/>
-
           }
 
         }
@@ -162,8 +171,10 @@ class Login extends Component {
                     {authenticated}
                     {errorMessage}
                   <form onSubmit={this.submitHandler}>
+                    <h1 style={{marginTop:"2rem"}}>Sign In </h1>
                     {form}
-                    <button type='submit' className="custom-button btn-info ">LogIN</button>
+                    {message}
+                    <button style={{marginTop:"5rem"}} type='submit' className="custom-button btn-info ">LogIN</button>
                   </form>
                 </div>
                 </div>

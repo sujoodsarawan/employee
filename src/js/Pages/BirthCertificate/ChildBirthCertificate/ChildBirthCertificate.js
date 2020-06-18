@@ -37,7 +37,7 @@ class ChildBirthCertificate extends Component {
       <TabelForm
         index={index}
         key={employee._id}
-        requestedDate={employee.requestedDate}
+        requestedDate={new Date(employee.requestedDate).toDateString()}
         nationalIdForKid={employee.nationalIdForFather}
         image={employee.birthAnnouncmentImage.substring(7) }
         link="/child/birth/certificate"
